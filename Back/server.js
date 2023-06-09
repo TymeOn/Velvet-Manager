@@ -3,6 +3,8 @@ import http from 'http'
 import dotenv from 'dotenv';
 import crypto from 'crypto';
 import cors from 'cors';
+import fs from 'fs';
+import https from 'https';
 import {DB} from './src/config/DB.js';
 import {Server} from 'socket.io';
 import {UserDAO} from './src/dao/UserDAO.js';
@@ -49,6 +51,10 @@ const inventoryDAO = new InventoryDAO();
 const characterDAO = new CharacterDAO();
 const RESSOURCE_NOT_FOUND = "The requested ressource is not available."
 
+const options = {
+    key: fs.readFileSync(process.env.KEY_FILE),
+    cert: fs.readFileSync(process.env.CERT_FILE)
+};
 
 
 // USER OPERATIONS
@@ -588,7 +594,7 @@ app.put('/character/:id', async (req, res) => {
 // STARTUP
 // -------
 
-const server = http.createServer({}, app).listen(process.env.PORT, () => {
+const server = https.createServer(options, app).listen(process.env.PORT, () => {
     console.log('Velvet-Manager-Back running on port ' + process.env.PORT);
     DB.open();
 });
