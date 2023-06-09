@@ -1,0 +1,30 @@
+<div class="container-fluid pt-5" style="height: 100vh; background-color: grey">
+
+  <!-- login card -->
+  <div class="card shadow-sm border-0" style="margin-left: 30%; margin-right: 30%;">
+
+    <!-- cover image -->
+    <img alt="cover_image" class="card-img-top" src="./assets/covers/{{ coverImgSrc }}">
+
+    <!-- dice component -->
+    <div class="card-body p-4">
+
+      <!-- username input -->
+      <div class="mb-3">
+        <label class="form-label" for="inputUsername">Identifiant</label>
+        <input [(ngModel)]="username" class="form-control" id="inputUsername" maxlength="128" name="username" type="text">
+      </div>
+
+      <!-- key input -->
+      <div class="mb-4">
+        <label class="form-label" for="inputKey">Clé</label>
+        <input (keyup.enter)="login()" [(ngModel)]="key" class="form-control" id="inputKey" maxlength="128" name="key" type="password">
+      </div>
+
+      <!-- login button -->
+      <button (click)="login()" class="btn btn-primary">Envoyer</button>
+    </div>
+
+  </div>
+
+</div>

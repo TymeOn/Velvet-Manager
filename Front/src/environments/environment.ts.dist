@@ -1,0 +1,13 @@
+export const environment = {
+  url: "<api url>",
+  coverImgSrc: "<cover filename in the assets/covers folder>",
+  southWestLat: <bottom left bound latitude>,
+  southWestLng: <bottom left bound longitude>,
+  centerLat: <center point latitude>,
+  centerLng: <center point longitude>,
+  northEastLat: <top right bound latitude>,
+  northEastLng: <top right bound longitude>,
+  minZoom: <minimum zoom level>,
+  defaultZoom: <default zoom level>,
+  maxZoom: <maximum zoom level>
+};

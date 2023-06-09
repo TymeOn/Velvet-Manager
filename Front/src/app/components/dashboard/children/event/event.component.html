@@ -1,0 +1,24 @@
+<div class="px-1 py-0 text-center">
+
+  <h4 class="m-0">Évènements</h4>
+
+  <hr style="margin: 0.75rem">
+
+  <!-- event list -->
+  <div class="text-start px-1">
+    <span *ngFor="let event of events">
+      <span class="d-inline-block rounded-circle"
+            style="height: 12px; width: 12px; transition: 1s ease-in-out; border: solid 2px"
+            [ngClass]="getBorderColorClass()" [ngStyle]="{'background-color': event.color}"></span>
+      <span class="ms-2" [ngClass]="event.hidden ? 'text-muted fst-italic' : ''">{{ event.title }}</span>
+      <br>
+    </span>
+
+    <!-- label for no events -->
+    <span *ngIf="events.length == 0">
+      <span class="ms-2 text-muted fst-italic">Vide</span>
+    </span>
+
+  </div>
+
+</div>

@@ -1,0 +1,179 @@
+<ul class="circles">
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+
+<div class="container-fluid"
+     [class.area-day]="dataService.getDay().timeslot == 'day' && !dataService.getDay().mirror"
+     [class.area-night]="dataService.getDay().timeslot == 'night' && !dataService.getDay().mirror"
+     [class.area-mirror]="dataService.getDay().mirror">
+
+  <div class="row" style="padding: 2vh; height: 100vh">
+
+    <!-- first column -->
+    <div class="col-2 flex-column">
+
+      <!-- day component -->
+      <div class="card shadow ease" style="margin-bottom: 2vh;" [ngClass]="getCardColorClass()">
+        <div class="card-body">
+          <app-day [day]="dataService.getDay()" [admin]="dataService.getAdmin()"></app-day>
+        </div>
+      </div>
+
+      <!-- weather component -->
+      <div class="card ease" style="margin-bottom: 2vh;" [ngClass]="getCardColorClass()">
+        <div class="card-body">
+          <app-weather [weather]="dataService.getWeather()" [timeslot]="dataService.getDay().timeslot"></app-weather>
+        </div>
+      </div>
+
+      <!-- event & calendar components -->
+      <div class="card ease" [ngClass]="getCardColorClass()" style="max-height: calc(100vh - 324px);">
+        <div class="card-body" style="overflow-y: auto">
+          <app-event [events]="dataService.getCurrentEvents()" [day]="dataService.getDay()"></app-event>
+        </div>
+        <div class="card-footer text-center text-muted">
+          <a class="link-secondary" style="cursor: pointer" (click)="openModal(calendarModal)">
+            <span>Calendrier</span>
+            <i class="fas fa-calendar-week ps-1"></i>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- second column -->
+    <div class="col-6">
+
+      <!-- map component -->
+      <div class="card h-100 ease border-0" [ngClass]="getCardColorClass()">
+        <div class="card-body p-0">
+          <app-map [markers]="dataService.getMarkers()" [day]="dataService.getDay()"></app-map>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- third column -->
+    <div class="col-4">
+
+      <div class="card invisible">
+        <ul class="nav nav-tabs border-bottom-0 visible" role="tablist">
+
+          <li class="nav-item ms-2" role="presentation">
+            <button class="nav-link active py-1 px-2 ease" id="markers-tab" data-bs-toggle="tab"
+                    data-bs-target="#markers" type="button" role="tab"
+                    [ngClass]="getNavColorClass()">
+              <span *ngIf="!dataService.getAdmin()">Général</span>
+              <i class="fas fa-user" [class]="dataService.getAdmin() ? 'px-2' : 'ps-2'"></i>
+            </button>
+          </li>
+
+          <li class="nav-item ms-1" role="presentation">
+            <button class="nav-link py-1 px-2 ease" id="persona-tab" data-bs-toggle="tab"
+                    data-bs-target="#persona" type="button" role="tab"
+                    [ngClass]="getNavColorClass()">
+              <span *ngIf="!dataService.getAdmin()">Persona</span>
+              <i class="fas fa-theater-masks" [class]="dataService.getAdmin() ? 'px-2' : 'ps-2'"></i>
+            </button>
+          </li>
+
+          <li class="nav-item ms-1" role="presentation">
+            <button class="nav-link py-1 px-2 ease" id="confidants-tab" data-bs-toggle="tab"
+                    data-bs-target="#confidant" type="button" role="tab"
+                    [ngClass]="getNavColorClass()">
+              <span *ngIf="!dataService.getAdmin()">Confidants</span>
+              <i class="fas fa-user-friends" [class]="dataService.getAdmin() ? 'px-2' : 'ps-2'"></i>
+            </button>
+          </li>
+
+          <li class="nav-item ms-1" role="presentation">
+            <button class="nav-link py-1 px-2 ease" id="inventory-tab" data-bs-toggle="tab"
+                    data-bs-target="#inventory" type="button" role="tab"
+                    [ngClass]="getNavColorClass()">
+              <i class="fas fa-suitcase px-2"></i>
+            </button>
+          </li>
+
+          <li *ngIf="dataService.getAdmin()" class="nav-item ms-auto me-1" role="presentation" ngbDropdown>
+            <button class="nav-link py-1 px-2 ease" id="user-tab" type="button" [ngClass]="getNavColorClass()" ngbDropdownToggle>
+              <i class="fas fa-user-edit"></i>
+            </button>
+            <div [ngClass]="getCardColorClass()" ngbDropdownMenu>
+              <a *ngFor="let user of users" ngbDropdownItem (click)="dataService.setUserId(user.id); reloadPlayerComponents()"
+                 [class.drop-text-night]="dataService.getDay().timeslot == 'night' && !dataService.getDay().mirror"
+                 [class.drop-text-mirror]="dataService.getDay().mirror">
+                <span [class.text-decoration-underline]="user.id == dataService.getUserId()"
+                      [class.fw-bold]="user.id == dataService.getUserId()">{{ user.username }}</span>
+              </a>
+            </div>
+          </li>
+
+          <li class="nav-item me-2" role="presentation" [class.ms-auto]="isPlayer() && !dataService.getAdmin()">
+            <button class="nav-link py-1 px-2 ease" id="config-tab" data-bs-toggle="tab"
+                    data-bs-target="#config" type="button" role="tab"
+                    [ngClass]="getNavColorClass()">
+              <i class="fas fa-cog"></i>
+            </button>
+          </li>
+
+        </ul>
+      </div>
+
+      <div class="card ease tab-content" style="height: calc(100vh - 160px); margin-bottom: 2vh" [ngClass]="getCardColorClass()">
+
+        <div class="tab-pane fade h-100 show active" id="markers" role="tabpanel">
+          <app-character *ngIf="isPlayer()" [character]="dataService.getCharacter()" [persona]="dataService.getPersona()" [day]="dataService.getDay()"></app-character>
+          <p *ngIf="!isPlayer()" class="p-3"> Pas de joueur selectionné.</p>
+        </div>
+
+        <div class="tab-pane fade h-100" id="persona" role="tabpanel">
+          <app-persona *ngIf="isPlayer()" [persona]="dataService.getPersona()" [day]="dataService.getDay()"></app-persona>
+          <p *ngIf="!isPlayer()" class="p-3"> Pas de joueur selectionné.</p>
+        </div>
+
+        <div class="tab-pane fade h-100" id="confidant" role="tabpanel">
+          <app-confidant *ngIf="isPlayer()" [confidants]="dataService.getConfidants()" [day]="dataService.getDay()"></app-confidant>
+          <p *ngIf="!isPlayer()" class="p-3"> Pas de joueur selectionné.</p>
+        </div>
+
+        <div class="tab-pane fade h-100" id="inventory" role="tabpanel">
+          <app-inventory *ngIf="isPlayer()" [inventory]="dataService.getInventory()" [day]="dataService.getDay()"></app-inventory>
+          <p *ngIf="!isPlayer()" class="p-3"> Pas de joueur selectionné.</p>
+        </div>
+
+
+        <div class="tab-pane fade p-3" id="config" role="tabpanel">
+          <button *ngIf="dataService.getAdmin()" class="btn btn-outline-secondary me-2" (click)="redirectToBackoffice()">Backoffice</button>
+          <button class="btn btn-outline-primary" (click)="auth.logout()">Déconnexion</button>
+        </div>
+      </div>
+
+      <!-- dice component -->
+      <div class="card ease" [ngClass]="getCardColorClass()">
+        <div class="card-body">
+          <app-dice [rolls]="dataService.getRolls()" [userId]="userId"
+                    [day]="dataService.getDay()" [admin]="dataService.getAdmin()">
+          </app-dice>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- calendar modal -->
+<ng-template #calendarModal let-modal>
+  <div class="modal-body rounded" [ngClass]="getCardColorClass()">
+    <button type="button" class="btn-close float-end" (click)="modal.dismiss('Cross click')"></button>
+    <app-calendar [events]="dataService.getEvents()" [day]="dataService.getDay()"></app-calendar>
+  </div>
+</ng-template>

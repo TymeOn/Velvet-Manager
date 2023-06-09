@@ -1,0 +1,92 @@
+<div *ngIf="confidants" class="d-flex flex-column justify-content-around h-100 px-3 pt-3 pb-2">
+
+  <!-- confidant lines -->
+  <div *ngFor="let data of [].constructor(12); let i = index" class="d-flex flex-row align-items-center">
+
+    <!-- arcana card image -->
+    <img [src]="'/assets/tarot-cards/' + (confidants.arcana[i] != '' ? confidants.arcana[i] : 'none') + '.png'"
+         style="height: 40px; border: solid 2px; border-radius: 5px" class="ease"
+         [class.border-dark]="day.timeslot == 'day' && !day.mirror"
+         [class.border-white]="day.timeslot == 'night' && !day.mirror"
+         [class.border-mirror]="day.mirror" alt="Arcana Card">
+
+    <div class="vr mx-3"></div>
+
+    <!-- arcana selector -->
+    <select [(ngModel)]="confidants.arcana[i]" class="form-select form-select-sm ease" style="width: 30%"
+            [ngClass]="getColorClass()" [class.select-mirror]="day.mirror">
+      <option value="" class="fst-italic">- Arcane -</option>
+      <option value="fool">Le Mat</option>
+      <option value="magician">Le Bateleur</option>
+      <option value="priestess">La Papesse</option>
+      <option value="empress">L'Impératrice</option>
+      <option value="emperor">L'Empereur</option>
+      <option value="hierophant">Le Pape</option>
+      <option value="lovers">L’Amoureux</option>
+      <option value="chariot">Le Chariot</option>
+      <option value="justice">La Justice</option>
+      <option value="hermit">L’Hermite</option>
+      <option value="fortune">La Roue de Fortune</option>
+      <option value="strength">La Force</option>
+      <option value="hanged">Le Pendu</option>
+      <option value="death">La Mort</option>
+      <option value="temperance">Tempérance</option>
+      <option value="devil">Le Diable</option>
+      <option value="tower">La Maison Dieu</option>
+      <option value="star">L'Étoile</option>
+      <option value="moon">La Lune</option>
+      <option value="sun">Le Soleil</option>
+      <option value="judgement">Le Jugement</option>
+      <option value="world">Le Monde</option>
+    </select>
+
+    <!-- name input field -->
+    <input [(ngModel)]="confidants.name[i]" class="form-control form-control-sm ms-2 p-0 text-center ease" placeholder="Nom"
+           style="width: 35%" type="text"
+           [ngClass]="getColorClass()">
+
+    <div class="vr mx-3"></div>
+
+    <!-- confidant level input -->
+    <input [(ngModel)]="confidants.lvl[i]" class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="LV"
+           style="width: 8%" type="number" [ngClass]="getColorClass()" title="Niveau">
+
+    <!-- confidant experience input -->
+    <input [(ngModel)]="confidants.exp[i]" class="form-control form-control-sm text-center ease px-1 ms-2" placeholder="XP"
+           style="width: 8%" type="number" [ngClass]="getColorClass()" title="XP">
+
+  </div>
+
+  <!-- bottom toolbar -->
+  <div #helpTarget class="d-flex flex-row justify-content-between align-items-center mt-2">
+
+    <!-- update button -->
+    <button class="btn btn-outline-success px-2 py-1 me-4" (click)="updateConfidant()">
+      <i class="fas fa-save"></i>
+    </button>
+
+    <!-- info popover trigger -->
+    <i [positionTarget]="helpTarget" class="fas fa-lg fa-question-circle"
+       [ngbPopover]="confidantHelp"
+       [ngStyle]="helpHovered ? {color: day.mirror ? '#efeda6' : 'grey' } : {color: day.mirror ? '#f1edc8' : 'lightgrey'}"
+       placement="top"
+       triggers="mouseenter:mouseleave"
+       [popoverClass]="getPopoverColorClass()"
+       (mouseenter)="helpHovered = true"
+       (mouseleave)="helpHovered = false">
+    </i>
+
+  </div>
+</div>
+
+<!-- confidant help popup -->
+<ng-template #confidantHelp>
+  <div [ngClass]="getTextColorClass()">
+    <div class="my-1 text-center fw-bold">MONTER DE NIVEAU</div>
+    <div class="mb-1 text-center">• Passage de 0 à 1 : <span class="fw-bold">3 SXP</span></div>
+    <div class="mb-1 text-center">• Passage de 1 à 2 : <span class="fw-bold">6 SXP</span></div>
+    <div class="mb-1 text-center">• Passage de 2 à 3 : <span class="fw-bold">9 SXP</span></div>
+    <div class="mb-1 text-center">• Passage de 3 à 4 : <span class="fw-bold">10 SXP</span></div>
+    <div class="text-center">• Passage de 4 à 5 : <span class="fw-bold">10 SXP</span></div>
+  </div>
+</ng-template>

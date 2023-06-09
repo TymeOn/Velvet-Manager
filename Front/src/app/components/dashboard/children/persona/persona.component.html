@@ -1,0 +1,456 @@
+<div *ngIf="persona" class="d-flex flex-column justify-content-between h-100 px-3 pt-3 pb-2">
+
+  <!-- general row -->
+  <div class="d-flex flex-row justify-content-between">
+
+      <!-- general col -->
+      <div class="d-flex flex-row justify-content-between">
+
+        <!-- arcana card image -->
+        <img [class.border-dark]="day.timeslot == 'day' && !day.mirror"
+             [class.border-mirror]="day.mirror" [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             [src]="'/assets/tarot-cards/' + (persona.arcana ? persona.arcana : 'none') + '.png'"
+             alt="Arcana Card"
+             class="ease p-0" style="width: 51px; border: solid 2px; border-radius: 5px">
+
+        <!-- general input fields -->
+        <div class="ps-2">
+          <div class="d-flex flex-row">
+
+            <!-- name input field -->
+            <input [(ngModel)]="persona.name" [ngClass]="getColorClass()" class="form-control form-control-sm px-1 text-center ease"
+                   placeholder="Nom" style="width: 100%"
+                   type="text" title="Nom">
+
+            <!-- persona level input -->
+            <input [(ngModel)]="persona.lvl" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 fw-bolder ms-2"
+                   placeholder="LV" style="width: 20%" type="number" title="Niveau">
+
+            <!-- persona experience input -->
+            <input [(ngModel)]="persona.exp" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 ms-2"
+                   placeholder="XP" style="width: 20%" type="number" title="EXP">
+
+          </div>
+
+          <div class="d-flex flex-row mt-2">
+
+            <!-- arcana selector -->
+            <select [(ngModel)]="persona.arcana" [class.select-mirror]="day.mirror"
+                    [ngClass]="getColorClass()" class="form-select form-select-sm ease me-1" title="Arcane">
+              <option class="fst-italic" value="">- Arcane -</option>
+              <option value="fool">Le Mat</option>
+              <option value="magician">Le Bateleur</option>
+              <option value="priestess">La Papesse</option>
+              <option value="empress">L'Impératrice</option>
+              <option value="emperor">L'Empereur</option>
+              <option value="hierophant">Le Pape</option>
+              <option value="lovers">L’Amoureux</option>
+              <option value="chariot">Le Chariot</option>
+              <option value="justice">La Justice</option>
+              <option value="hermit">L’Hermite</option>
+              <option value="fortune">La Roue de Fortune</option>
+              <option value="strength">La Force</option>
+              <option value="hanged">Le Pendu</option>
+              <option value="death">La Mort</option>
+              <option value="temperance">Tempérance</option>
+              <option value="devil">Le Diable</option>
+              <option value="tower">La Maison Dieu</option>
+              <option value="star">L'Étoile</option>
+              <option value="moon">La Lune</option>
+              <option value="sun">Le Soleil</option>
+              <option value="judgement">Le Jugement</option>
+              <option value="world">Le Monde</option>
+            </select>
+
+            <!-- suit selector -->
+            <select [(ngModel)]="persona.suit" [class.select-mirror]="day.mirror"
+                    [ngClass]="getColorClass()" class="form-select form-select-sm ease ms-1" title="Enseigne">
+              <option class="fst-italic" value="">- Enseigne -</option>
+              <option value="wands">Bâtons</option>
+              <option value="cups">Coupes</option>
+              <option value="coins">Deniers</option>
+              <option value="swords">Épées</option>
+              <option value="compass">Boussole</option>
+              <option value="aeon">Aeon</option>
+            </select>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- stats col -->
+      <div class="d-flex flex-column ms-2" style="width: 100%">
+        <div [class.border-mirror]="day.mirror"
+             [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             alt="Arcana Card"
+             class="ease border border-primary" style="border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; height: 40px">
+          <canvas [data]="barChartData"
+                  [options]="barChartOptions"
+                  [type]="'bar'"
+                  baseChart>
+          </canvas>
+        </div>
+
+        <div class="d-flex flex-row justify-content-between">
+
+          <input [(ngModel)]="persona.str" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="FO" style="border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0"
+                 type="number" title="Force">
+
+          <input [(ngModel)]="persona.mag" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="MA" style="border-radius: 0"
+                 type="number" title="Magie">
+
+          <input [(ngModel)]="persona.end" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="EN" style="border-radius: 0"
+                 type="number" title="Endurance">
+
+          <input [(ngModel)]="persona.agi" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="AG" style="border-radius: 0"
+                 type="number" title="Agilité">
+
+          <input [(ngModel)]="persona.luc" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="CH" style="border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-left-radius: 0"
+                 type="number" title="Chance">
+
+        </div>
+      </div>
+
+  </div>
+
+  <!-- affinities row -->
+  <div class="d-flex flex-row justify-content-between mt-2 mb-1">
+
+      <!-- physical affinity -->
+      <div class="d-flex flex-column">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/physical.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[0]" [ngClass]="getColorClass()" title="Physique"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- ranged affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/ranged.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[1]" [ngClass]="getColorClass()" title="Distance"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- fire affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/fire.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[2]" [ngClass]="getColorClass()" title="Feu"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- ice affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             alt="Arcana Card"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/ice.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[3]" [ngClass]="getColorClass()"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- electric affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/electric.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[4]" [ngClass]="getColorClass()" title="Glace"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- wind affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/wind.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[5]" [ngClass]="getColorClass()" title="Vent"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- psychokinesis affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary" title="Psy"
+             src="./assets/damage-types/psychokinesis.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[6]" [ngClass]="getColorClass()"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- nuclear affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/nuclear.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[7]" [ngClass]="getColorClass()" title="Nucléaire"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- bless affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/bless.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[8]" [ngClass]="getColorClass()" title="Bénédiction"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+      <!-- curse affinity -->
+      <div class="d-flex flex-column ms-2">
+        <img [class.border-mirror]="day.mirror" [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
+             [class.border-white]="day.timeslot == 'night' && !day.mirror"
+             class="img-fluid ease border border-primary"
+             src="./assets/damage-types/curse.jpg" style="width: 51px; border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px;">
+        <input [(ngModel)]="persona.affinities[9]" [ngClass]="getColorClass()" title="Malédiction"
+               class="form-control input-sm text-center ease px-1 fw-bolder" style="border-top-left-radius: 0; border-top-right-radius: 0;" type="text">
+      </div>
+
+    </div>
+
+  <!-- attacks row -->
+  <div class="d-flex flex-row justify-content-between">
+
+    <!-- first attack col -->
+    <div class="d-flex flex-column align me-1">
+
+      <div *ngFor="let data of [].constructor(4); let i = index" class="input-group">
+
+        <input [(ngModel)]="persona.attacks[i]" [class.no-bottom-border]="i != 3" [class.roundBottomLeft]="i == 3"
+               [class.roundTopLeft]="i == 0" [ngClass]="getColorClass()" class="form-control input-sm m p-0 text-center rounded-0 ease"
+               placeholder="Compétence"
+               style="width: 40%;"
+               type="text">
+
+        <select [(ngModel)]="persona.attackTypes[i]" [class.no-bottom-border]="i != 3" title="Type"
+                [ngClass]="getColorClass()" class="form-select input-sm ease no-arrow">
+          <option value=""></option>
+          <option value="phys">Physique</option>
+          <option value="ranged">Distance</option>
+          <option value="fire">Feu</option>
+          <option value="ice">Glace</option>
+          <option value="electric">Électrique</option>
+          <option value="wind">Vent</option>
+          <option value="psychokinesis">Psy</option>
+          <option value="nuclear">Nucléaire</option>
+          <option value="bless">Bénidiction</option>
+          <option value="curse">Malédiction</option>
+          <option value="almighty">Tout-puissant</option>
+          <option value="ailment">Affliction</option>
+          <option value="healing">Guérison</option>
+          <option value="support">Support</option>
+          <option value="passive">Passif</option>
+        </select>
+
+        <input [(ngModel)]="persona.attackDamages[i]" [class.no-bottom-border]="i != 3"
+               [class.roundBottomRight]="i == 3" [class.roundTopRight]="i == 0" [ngClass]="getColorClass()" class="form-control input-sm p-0 text-center rounded-0 ease"
+               placeholder="Dégâts"
+               style="width: 12%"
+               type="text">
+
+      </div>
+
+    </div>
+
+    <!-- second attack col -->
+    <div class="d-flex flex-column ms-1">
+
+      <div *ngFor="let data of [].constructor(4); let i = index" class="input-group">
+
+        <input [(ngModel)]="persona.attacks[i+4]" [class.no-bottom-border]="i != 3" [class.roundBottomLeft]="i == 3"
+               [class.roundTopLeft]="i == 0" [ngClass]="getColorClass()" class="form-control input-sm p-0 text-center rounded-0 ease"
+               placeholder="Compétence"
+               style="width: 40%;"
+               type="text">
+
+        <select [(ngModel)]="persona.attackTypes[i+4]" [class.no-bottom-border]="i != 3"
+                [ngClass]="getColorClass()" class="form-select input-sm ease no-arrow">
+          <option value=""></option>
+          <option value="phys">Physique</option>
+          <option value="ranged">Distance</option>
+          <option value="fire">Feu</option>
+          <option value="ice">Glace</option>
+          <option value="electric">Électrique</option>
+          <option value="wind">Vent</option>
+          <option value="psychokinesis">Psy</option>
+          <option value="nuclear">Nucléaire</option>
+          <option value="bless">Bénidiction</option>
+          <option value="curse">Malédiction</option>
+          <option value="almighty">Tout-puissant</option>
+          <option value="ailment">Affliction</option>
+          <option value="healing">Guérison</option>
+          <option value="support">Support</option>
+          <option value="passive">Passif</option>
+        </select>
+
+        <input [(ngModel)]="persona.attackDamages[i+4]" [class.no-bottom-border]="i != 3"
+               [class.roundBottomRight]="i == 3" [class.roundTopRight]="i == 0" [ngClass]="getColorClass()" class="form-control input-sm p-0 text-center rounded-0 ease"
+               placeholder="Dégâts"
+               style="width: 12%"
+               type="text">
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- skills row -->
+  <div class="d-flex flex-row justify-content-between mt-2">
+
+    <!-- first skills col -->
+    <div class="d-flex flex-column me-1">
+
+      <div *ngFor="let data of [].constructor(10); let i = index" class="input-group d-flex align-items-center">
+
+        <input [(ngModel)]="persona.skills[i]" [class.no-bottom-border]="i != 9" [class.roundBottomLeft]="i == 9"
+               [class.roundTopLeft]="i == 0" [ngClass]="getColorClass()" class="form-control input-xs p-0 text-center ease rounded-0"
+               placeholder="Capacité"
+               style="width: 50%;"
+               type="text">
+
+        <input [(ngModel)]="persona.skillCosts[i]" [class.no-bottom-border]="i != 9"
+               [ngClass]="getColorClass()" class="form-control input-xs p-0 text-center ease rounded-0"
+               type="text" title="Coût SP">
+
+        <!-- edit button -->
+        <button (click)="openSkillEffectModal(i)" [class.no-bottom-border]="i != 9"
+                [class.roundBottomRight]="i == 9"
+                [class.roundTopRight]="i == 0"
+                class="btn btn-sm btn-outline-warning input-xs">
+          <i class="fas fa-pen"></i>
+        </button>
+
+        <i (mouseenter)="effectsHovered[i] = true; currentEffect = persona.skillEffects[i]"
+           (mouseleave)="effectsHovered[i] = false"
+           [ngStyle]="effectsHovered[i] ? {color: day.mirror ? '#efeda6' : 'grey' } : {color: day.mirror ? '#f1edc8' : 'lightgrey'}"
+           [ngbPopover]="skillEffect"
+           [popoverClass]="getPopoverColorClass()"
+           class="fas fa-question-circle ms-2"
+           placement="left"
+           triggers="mouseenter:mouseleave">
+        </i>
+
+      </div>
+
+    </div>
+
+    <!-- second skills col -->
+    <div class="d-flex flex-column ms-1">
+
+      <div *ngFor="let data of [].constructor(10); let i = index" class="input-group d-flex align-items-center">
+
+        <input [(ngModel)]="persona.skills[i+10]" [class.no-bottom-border]="i != 9" [class.roundBottomLeft]="i == 9"
+               [class.roundTopLeft]="i == 0" [ngClass]="getColorClass()" class="form-control input-xs p-0 text-center ease rounded-0"
+               placeholder="Capacité"
+               style="width: 50%;"
+               type="text">
+
+        <input [(ngModel)]="persona.skillCosts[i+10]" [class.no-bottom-border]="i != 9"
+               [ngClass]="getColorClass()" class="form-control input-xs p-0 text-center ease rounded-0"
+               type="text">
+
+        <!-- edit button -->
+        <button (click)="openSkillEffectModal(i+10)" [class.no-bottom-border]="i != 9"
+                [class.roundBottomRight]="i == 9"
+                [class.roundTopRight]="i == 0"
+                class="btn btn-sm btn-outline-warning input-xs">
+          <i class="fas fa-save"></i>
+        </button>
+
+        <i (mouseenter)="effectsHovered[i+10] = true; currentEffect = persona.skillEffects[i+10]"
+           (mouseleave)="effectsHovered[i+10] = false"
+           [ngStyle]="effectsHovered[i+10] ? {color: day.mirror ? '#efeda6' : 'grey' } : {color: day.mirror ? '#f1edc8' : 'lightgrey'}"
+           [ngbPopover]="skillEffect"
+           [popoverClass]="getPopoverColorClass()"
+           class="fas fa-question-circle ms-2"
+           placement="left"
+           triggers="mouseenter:mouseleave">
+        </i>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- bottom toolbar -->
+  <div #helpTarget class="d-flex flex-row justify-content-between align-items-center mt-2">
+
+    <!-- update button -->
+    <button (click)="updatePersona()" class="btn btn-outline-success px-2 py-1 me-4">
+      <i class="fas fa-save"></i>
+    </button>
+
+    <!-- info popover trigger -->
+    <i (mouseenter)="helpHovered = true" (mouseleave)="helpHovered = false"
+       [ngStyle]="helpHovered ? {color: day.mirror ? '#efeda6' : 'grey' } : {color: day.mirror ? '#f1edc8' : 'lightgrey'}"
+       [ngbPopover]="personaHelp"
+       [popoverClass]="getPopoverColorClass()"
+       [positionTarget]="helpTarget"
+       class="fas fa-lg fa-question-circle"
+       triggers="mouseenter:mouseleave"
+       placement="top">
+    </i>
+
+  </div>
+
+</div>
+
+<!-- skill effect popup -->
+<ng-template #skillEffect>
+  <div [ngClass]="getTextColorClass()">
+    <div class="my-1 text-center">{{ currentEffect }}</div>
+  </div>
+</ng-template>
+
+<!-- persona help popup -->
+<ng-template #personaHelp>
+  <div [ngClass]="getTextColorClass()" style="font-size: 10px;">
+    <div class="my-1 text-center fw-bold" style="font-size: 13px;">MONTER DE NIVEAU</div>
+    <div><u>Niveau 2</u> : <span class="fw-bold">5 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 3</u> : <span class="fw-bold">6 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 4</u> : <span class="fw-bold">7 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 5</u> : <span class="fw-bold">8 XP</span> - (Capacité d'arcane / Stats Bonus / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 6</u> : <span class="fw-bold">9 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus / SP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 7</u> : <span class="fw-bold">10 XP</span> - (Capacité d'enseigne / 2 Compétences / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 8</u> : <span class="fw-bold">11 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 9</u> : <span class="fw-bold">12 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 10</u> : <span class="fw-bold">13 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 11</u> : <span class="fw-bold">14 XP</span> - (Capacité d'arcane / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 12</u> : <span class="fw-bold">15 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus / SP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 13</u> : <span class="fw-bold">16 XP</span> - (Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 14</u> : <span class="fw-bold">17 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+    <hr class="my-1">
+    <div><u>Niveau 15</u> : <span class="fw-bold">18 XP</span> - (Stats Bonus / Compétence / HP Bonus / SP Bonus)</div>
+  </div>
+</ng-template>

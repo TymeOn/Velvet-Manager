@@ -1,0 +1,32 @@
+<div class="d-flex flex-row p-2">
+
+  <!-- refresh button -->
+  <button class="btn btn-outline-secondary me-4" (click)="refreshDay()">
+    <i class="fas fa-sync-alt"></i>
+  </button>
+
+  <!-- current date input -->
+  <input type="date" class="form-control w-25 me-2 bg-dark text-white" [(ngModel)]="day.date">
+
+  <!-- current timeslot input -->
+  <select class="form-select w-25 me-2 bg-dark text-white" [(ngModel)]="day.timeslot">
+    <option value="day">Journée</option>
+    <option value="night">Soirée</option>
+  </select>
+
+  <!-- update button -->
+  <button class="btn btn-outline-success px-2 py-1 me-4" (click)="updateDay()">
+    <i class="fas fa-save"></i>
+  </button>
+
+  <!-- move the current day forward -->
+  <button class="btn btn-outline-secondary me-2" (click)="moveDayBackward()">
+    <i class="fas fa-caret-left"></i>
+  </button>
+
+  <!-- move the current day backward -->
+  <button class="btn btn-outline-secondary me-2" (click)="moveDayForward()">
+    <i class="fas fa-caret-right"></i>
+  </button>
+
+</div>

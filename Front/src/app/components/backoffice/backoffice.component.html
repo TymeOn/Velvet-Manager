@@ -1,0 +1,62 @@
+<div class="container-fluid pt-2 bg-secondary" style="height: 100vh">
+
+  <ul class="nav nav-tabs border-bottom-0" role="tablist">
+
+    <li class="nav-item ms-2" role="presentation">
+      <button class="nav-link active py-1 px-2 nav-night" id="markers-tab" data-bs-toggle="tab"
+              data-bs-target="#markers" type="button" role="tab">
+        <span>Marqueurs</span>
+        <i class="fas fa-map-pin ps-2"></i>
+      </button>
+    </li>
+    <li class="nav-item ms-1" role="presentation">
+      <button class="nav-link py-1 px-2 nav-night" id="events-tab" data-bs-toggle="tab"
+              data-bs-target="#events" type="button" role="tab">
+        <span>Événements</span>
+        <i class="fas fa-calendar-week ps-2"></i>
+      </button>
+    </li>
+    <li class="nav-item ms-1" role="presentation">
+      <button class="nav-link py-1 px-2 nav-night" id="day-tab" data-bs-toggle="tab"
+              data-bs-target="#day" type="button" role="tab">
+        <span>Jour</span>
+        <i class="fas fa-calendar-day ps-2"></i>
+      </button>
+    </li>
+    <li class="nav-item ms-1" role="presentation">
+      <button class="nav-link py-1 px-2 nav-night" id="weathers-tab" data-bs-toggle="tab"
+              data-bs-target="#weathers" type="button" role="tab">
+        <span>Météo</span>
+        <i class="fas fa-cloud-sun-rain ps-2"></i>
+      </button>
+    </li>
+    <li class="nav-item ms-1" role="presentation">
+      <button class="nav-link py-1 px-2 nav-night" id="users-tab" data-bs-toggle="tab"
+              data-bs-target="#users" type="button" role="tab">
+        <span>Utilisateurs</span>
+        <i class="fas fa-user ps-2"></i>
+      </button>
+    </li>
+  </ul>
+
+  <div class="card shadow tab-content bg-dark text-white" style="height: calc(100vh - 50px); overflow: auto">
+
+    <div class="tab-pane fade show active" id="markers" role="tabpanel">
+      <app-backoffice-markers></app-backoffice-markers>
+    </div>
+    <div class="tab-pane fade" id="events" role="tabpanel">
+      <app-backoffice-events></app-backoffice-events>
+    </div>
+    <div class="tab-pane fade" id="day" role="tabpanel">
+      <app-backoffice-day></app-backoffice-day>
+    </div>
+    <div class="tab-pane fade" id="weathers" role="tabpanel">
+      <app-backoffice-weathers></app-backoffice-weathers>
+    </div>
+    <div class="tab-pane fade" id="users" role="tabpanel">
+      <app-backoffice-users></app-backoffice-users>
+    </div>
+  </div>
+
+</div>
+

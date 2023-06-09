@@ -1,0 +1,15 @@
+.nav-night {
+  background-color: #212529;
+  color: #535fe3;
+}
+
+.nav-night.active {
+  background-color: #212529;
+  border-color: #212529;
+  color: #ffffff;
+}
+
+::ng-deep .modal-content  {
+  background-color: #212529 !important;
+  color: white;
+}

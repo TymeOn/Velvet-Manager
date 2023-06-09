@@ -1,0 +1,11 @@
+<div *ngIf="weather" class="d-flex flex-row justify-content-between">
+
+  <!-- temperature display -->
+  <h1 class="ps-1 mb-0">{{ weather.temperature }}°C</h1>
+
+  <div class="vr"></div>
+
+  <!-- weather code display -->
+  <i class="fas fa-3x pe-1" [ngClass]="'fa-' + getWeatherIcon(weather.code)"></i>
+
+</div>

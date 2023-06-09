@@ -1,0 +1,125 @@
+<!-- toolbar -->
+<div class="d-flex flex-row p-2">
+
+  <!-- creation button -->
+  <button class="btn btn-outline-success me-2" (click)="setCurrentEvent(eventTemplate); openModal(eventModal)">
+    <i class="fas fa-plus-circle"></i>
+  </button>
+
+  <!-- refresh button -->
+  <button class="btn btn-outline-secondary me-4" (click)="refreshEvents()">
+    <i class="fas fa-sync-alt"></i>
+  </button>
+
+  <!-- search bar -->
+  <div class="input-group w-25 me-4">
+    <input #searchInput type="text" class="form-control bg-dark text-white" placeholder="Recherche" (input)="search(searchInput.value)">
+    <button class="btn btn-outline-secondary" type="button" (click)="searchInput.value = ''; resetSearch()">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <!-- ongoing selector -->
+  <div class="py-2">
+    <input
+      type="checkbox" class="form-check-input" id="weathersCurrentSelector"
+      [checked]="ongoingSelector" (click)="ongoingSelector = !ongoingSelector; refreshEvents()">
+    <label class="form-check-label ms-1" for="weathersCurrentSelector">En cours</label>
+  </div>
+
+</div>
+
+<hr class="mx-3 mt-0 mb-1">
+
+<!-- data table -->
+<table class="table table-sm table-striped table-hover table-dark mb-0">
+
+  <!-- headers -->
+  <thead>
+    <tr>
+      <th scope="col" style="width: 3%">#</th>
+      <th scope="col" style="width: 13%">Début</th>
+      <th scope="col" style="width: 13%">Fin</th>
+      <th scope="col">Titre</th>
+      <th scope="col" class="text-center" style="width: 8%">Couleur</th>
+      <th scope="col" class="text-center" style="width: 8%">Caché</th>
+      <th scope="col" style="width: 5%"></th>
+      <th scope="col" style="width: 5%"></th>
+    </tr>
+  </thead>
+
+  <!-- rows -->
+  <tbody>
+    <tr *ngFor="let event of eventList">
+      <th scope="row">{{ event.id }}</th>
+      <td class="pe-5">
+        <input *ngIf="formatDate(event.startDate) !== ''"
+               type="date" class="form-control text-center bg-dark text-white"
+               [value]="formatDate(event.startDate)" disabled>
+      </td>
+      <td class="pe-5">
+        <input *ngIf="formatDate(event.endDate) !== ''"
+               type="date" class="form-control text-center bg-dark text-white"
+               [value]="formatDate(event.endDate)" disabled>
+      </td>
+      <td>{{ event.title }}</td>
+      <td class="d-flex flex-row justify-content-center">
+        <input type="color" class="form-control form-control-color bg-dark" [value]="event.color" onclick="return false;">
+      </td>
+      <td class="text-center">
+        <input type="checkbox" class="form-check-input" [checked]="event.hidden" onclick="return false;">
+      </td>
+      <td>
+        <button class="btn btn-outline-warning px-2 py-1" (click)="setCurrentEvent(event); openModal(eventModal)">
+          <i class="fas fa-pen"></i>
+        </button>
+      </td>
+      <td>
+        <button class="btn btn-outline-danger px-2 py-1" (click)="setCurrentEvent(event); openModal(eventDeleteModal)">
+          <i class="fas fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- creation/update modal -->
+<ng-template #eventModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{currentEvent.id == 0 ? 'Création' : 'Édition' }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <input type="date" class="form-control mb-3 bg-dark text-white" placeholder="Début" [(ngModel)]="currentEvent.startDate">
+    <input type="date" class="form-control mb-3 bg-dark text-white" placeholder="Fin" [(ngModel)]="currentEvent.endDate">
+    <input type="text" class="form-control mb-3 bg-dark text-white" placeholder="Titre" [(ngModel)]="currentEvent.title">
+    <input type="color" class="form-control form-control-color mb-3 bg-dark" [(ngModel)]="currentEvent.color">
+    <div class="mb-3">
+      <input type="checkbox" class="form-check-input" id="eventHiddenCheck" [(ngModel)]="currentEvent.hidden">
+      <label class="form-check-label ms-1" for="eventHiddenCheck">Caché</label>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      class="btn"
+      [ngClass]="currentEvent.id == 0 ? 'btn-outline-success' : 'btn-outline-warning'"
+      (click)="currentEvent.id == 0 ? createEvent(currentEvent) : updateEvent(currentEvent)"
+    >
+      {{currentEvent.id == 0 ? 'Nouveau' : 'Modifier' }}
+    </button>
+  </div>
+</ng-template>
+
+<!-- deletion modal -->
+<ng-template #eventDeleteModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Suppression</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <p>Êtes-vous sûr de bien vouloir supprimer cet élément ?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-danger" (click)="deleteEvent(currentEvent)">Supprimer</button>
+  </div>
+</ng-template>

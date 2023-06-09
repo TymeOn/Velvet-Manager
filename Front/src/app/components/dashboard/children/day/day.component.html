@@ -1,0 +1,53 @@
+<div class="px-1 text-center">
+
+  <!-- date section -->
+  <div class="d-flex flex-row justify-content-between">
+
+    <!-- make date go backward -->
+    <button class="btn btn-outline-secondary p-2" (click)="moveDayBackward()" [disabled]="!admin">
+      <i class="fas fa-caret-left"></i>
+    </button>
+
+    <!-- date display -->
+    <div class="d-flex flex-column">
+      <h1>{{ formatDate(day.date) }}</h1>
+      <span class="badge" [ngClass]="getBadgeColorClass()">{{ formatDay(day.date) }}</span>
+    </div>
+
+    <!-- make date go forward -->
+    <button class="btn btn-outline-secondary p-2" (click)="moveDayForward()" [disabled]="!admin">
+      <i class="fas fa-caret-right"></i>
+    </button>
+  </div>
+
+  <hr style="margin-bottom: 0.75rem">
+
+  <!-- timeslot section -->
+  <div class="d-flex flex-row justify-content-between">
+
+    <!-- make timeslot go backward -->
+    <button class="btn btn-outline-secondary p-2" (click)="progressTimeslot()" [disabled]="!admin">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+
+    <div class="col">
+
+      <!-- timeslot display -->
+      <h4 class="mb-0 mt-1 fw-bold">{{ getTimeslot(day.timeslot) }}</h4>
+
+      <!-- mirror control -->
+      <div *ngIf="admin" class="d-flex justify-content-evenly">
+        <input type="checkbox" class="form-check-input mt-0" [checked]="day.mirror" (change)="day.mirror = !day.mirror; updateDay()">
+        <i class="fas fa-dungeon"></i>
+      </div>
+
+    </div>
+
+    <!-- make timeslot go forward -->
+    <button class="btn btn-outline-secondary p-2"(click)="progressTimeslot()" [disabled]="!admin">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+  </div>
+
+</div>
