@@ -11,12 +11,11 @@ export class EventDAO {
         const query = {
             text: `SELECT id, start_date::text, end_date::text, title, color, hidden
                 FROM ${process.env.PG_SCHEMA}.events WHERE 1=1` +
-                (ongoing ? `AND ((end_date IS NULL AND start_date = (SELECT date FROM ${process.env.PG_SCHEMA}.day))
-                    OR (end_date IS NOT NULL AND (SELECT date FROM ${process.env.PG_SCHEMA}.day) BETWEEN start_date AND end_date))` 
-                : ``) +
+                (ongoing ? ` AND end_date >= (SELECT date FROM ${process.env.PG_SCHEMA}.day)` : ``) +
                 (showAll ? `` : ` AND hidden=FALSE`) + 
                 ` ORDER BY start_date, end_date, title ASC`,
         };
+        console.log(query.text);
         const result = await client.query(query);
         let data;
         if(result && result.rows) {
