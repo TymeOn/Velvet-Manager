@@ -22,6 +22,9 @@ export class CalendarComponent implements OnChanges {
       end: '',
     },
     locale: frLocale,
+    eventDidMount: (info: any) => {
+      info.el.title = info.event.title;
+    }
   };
 
   ngOnChanges(changes: SimpleChanges): void {
