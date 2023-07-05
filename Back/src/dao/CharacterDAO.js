@@ -51,6 +51,10 @@ export class CharacterDAO {
                 result.rows[0].track3,
                 result.rows[0].track4,
                 result.rows[0].track5,
+                result.rows[0].exp_trigger1,
+                result.rows[0].exp_trigger2,
+                result.rows[0].exp_trigger3,
+                result.rows[0].money,
                 u
             );
         } else {
@@ -60,14 +64,14 @@ export class CharacterDAO {
     }
 
     // add a character
-    async add(name, ath, pro, gut, kno, cha, athExp, proExp, gutExp, knoExp, chaExp, currHp, totalHp, currSp, totalSp, currLuc, will, wild, weapon, weaponStat, weaponEffect, armor, armorStat, armorEffect, accessory, accessoryEffect, track1, track2, track3, track4, track5, user) {
+    async add(name, ath, pro, gut, kno, cha, athExp, proExp, gutExp, knoExp, chaExp, currHp, totalHp, currSp, totalSp, currLuc, will, wild, weapon, weaponStat, weaponEffect, armor, armorStat, armorEffect, accessory, accessoryEffect, track1, track2, track3, track4, track5, expTrigger1, expTrigger2, expTrigger3, money, user) {
         const client = await DB.open();
         const query = {
             text: `INSERT INTO ${process.env.PG_SCHEMA}.characters(name, ath, pro, gut, kno, cha, ath_exp, pro_exp, gut_exp, kno_exp, cha_exp,
                 curr_hp, total_hp, curr_sp, total_sp, curr_luc, will, wild, weapon, weapon_stat, weapon_effect, armor, armor_stat, armor_effect,
-                accessory, accessory_effect, track1, track2, track3, track4, track5, user_id) 
+                accessory, accessory_effect, track1, track2, track3, track4, track5, exp_trigger1, exp_trigger2, exp_trigger3, money, user_id) 
                     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19, $20, $21, $22, $23, 
-                        $24, $25, $26, $27, $28, $29, $30, $31, $32) RETURNING *`,
+                        $24, $25, $26, $27, $28, $29, $30, $31, $32, $33, $34, $35, $36) RETURNING *`,
             values: [
                 name,
                 ath,
@@ -100,6 +104,10 @@ export class CharacterDAO {
                 track3,
                 track4, 
                 track5,
+                expTrigger1,
+                expTrigger2,
+                expTrigger3,
+                money,
                 user.getId()
             ],
         };
@@ -141,6 +149,10 @@ export class CharacterDAO {
                 result.rows[0].track3,
                 result.rows[0].track4,
                 result.rows[0].track5,
+                result.rows[0].exp_trigger1,
+                result.rows[0].exp_trigger2,
+                result.rows[0].exp_trigger3,
+                result.rows[0].money,
                 u
             );
         } else {
@@ -159,7 +171,8 @@ export class CharacterDAO {
                         SET name=$2, ath=$3, pro=$4, gut=$5, kno=$6, cha=$7, ath_exp=$8, pro_exp=$9, gut_exp=$10, kno_exp=$11, cha_exp=$12,
                             curr_hp=$13, total_hp=$14, curr_sp=$15, total_sp=$16, curr_luc=$17, will=$18, wild=$19,
                             weapon=$20, weapon_stat=$21, weapon_effect=$22, armor=$23, armor_stat=$24, armor_effect=$25, 
-                            accessory=$26, accessory_effect=$27, track1=$28, track2=$29, track3=$30, track4=$31, track5=$32
+                            accessory=$26, accessory_effect=$27, track1=$28, track2=$29, track3=$30, track4=$31, track5=$32,
+                            exp_trigger1=$33, exp_trigger2=$34, exp_trigger3=$35, money=$36
                         WHERE id=$1
                         RETURNING *`,
                 values: [
@@ -194,7 +207,11 @@ export class CharacterDAO {
                     character.getTrack2(),
                     character.getTrack3(),
                     character.getTrack4(),
-                    character.getTrack5()
+                    character.getTrack5(),
+                    character.getExpTrigger1(),
+                    character.getExpTrigger2(),
+                    character.getExpTrigger3(),
+                    character.getMoney()
                 ],
             }
             const result = await client.query(query);
@@ -234,6 +251,10 @@ export class CharacterDAO {
                     result.rows[0].track3,
                     result.rows[0].track4,
                     result.rows[0].track5,
+                    result.rows[0].exp_trigger1,
+                    result.rows[0].exp_trigger2,
+                    result.rows[0].exp_trigger3,
+                    result.rows[0].money,
                     u
                 );
             }

@@ -135,6 +135,10 @@ export class DB {
                         track3 INTEGER,
                         track4 INTEGER,
                         track5 INTEGER,
+                        exp_trigger1 VARCHAR(256),
+                        exp_trigger2 VARCHAR(256),
+                        exp_trigger3 VARCHAR(256),
+                        money INTEGER,
                         user_id INTEGER,
                         PRIMARY KEY(id),
                         FOREIGN KEY(user_id) REFERENCES ${process.env.PG_SCHEMA}.users(id) ON DELETE CASCADE

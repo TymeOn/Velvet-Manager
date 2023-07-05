@@ -8,24 +8,27 @@
 
       <!-- general name field -->
       <div class="d-flex flex-row">
-        <input [(ngModel)]="character.name" [ngClass]="getColorClass()" class="form-control form-control-sm px-1 text-center ease"
-               placeholder="Nom" style="width: 100%" type="text" title="Nom">
+        <input [(ngModel)]="character.name" [ngClass]="getColorClass()"
+               class="form-control form-control-sm px-1 text-center ease"
+               placeholder="Nom" style="width: 100%" title="Nom" type="text">
       </div>
 
       <!-- persona info fields -->
       <div class="d-flex flex-row">
 
         <!-- arcana display -->
-        <input [value]="getArcanaValue(persona.arcana)" [ngClass]="getColorClass()"
+        <input [ngClass]="getColorClass()" [value]="getArcanaValue(persona.arcana)"
                class="form-control form-control-sm text-center ease px-1 me-1"
-               placeholder="Arcane" type="text" style="width: 67%" title="Arcane" disabled>
+               disabled placeholder="Arcane" style="width: 67%" title="Arcane" type="text">
 
         <!-- level display -->
         <div class="input-group ms-1" style="width: 33%">
-          <span class="input-group-text fst-italic fw-bold py-0 px-2"
-                style="color: #fe0000 !important; background-color: black !important;" [ngClass]="getColorClass()">LV</span>
-          <input [(ngModel)]="persona.lvl" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1"
-                 placeholder="HP" type="number" title="Niveau" disabled>
+          <span [ngClass]="getColorClass()"
+                class="input-group-text fst-italic fw-bold py-0 px-2"
+                style="color: #fe0000 !important; background-color: black !important;">LV</span>
+          <input [(ngModel)]="persona.lvl" [ngClass]="getColorClass()"
+                 class="form-control form-control-sm text-center ease px-1"
+                 disabled placeholder="HP" title="Niveau" type="number">
         </div>
 
       </div>
@@ -35,25 +38,31 @@
 
         <!-- character hp input -->
         <div class="d-flex flex-column me-1">
-        <span class="input-group-text fst-italic fw-bold py-0 rounded-0 roundTopLeft roundTopRight"
-              style="color: #00ce96 !important; background-color: black !important;" [ngClass]="getColorClass()">HP</span>
+          <span [ngClass]="getColorClass()"
+                class="input-group-text fst-italic fw-bold py-0 rounded-0 roundTopLeft roundTopRight"
+                style="color: #00ce96 !important; background-color: black !important;">HP</span>
           <div class="input-group">
-            <input [(ngModel)]="character.currHp" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease rounded-0 roundBottomLeft px-1"
-                   placeholder="HP" style="width: 20%" type="number" title="HP">
-            <input [(ngModel)]="character.totalHp" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease rounded-0 roundBottomRight px-1 fw-bolder"
-                   placeholder="MAX" style="width: 20%" type="number" title="Total HP">
+            <input [(ngModel)]="character.currHp" [ngClass]="getColorClass()"
+                   class="form-control form-control-sm text-center ease rounded-0 roundBottomLeft px-1"
+                   placeholder="HP" style="width: 20%" title="HP" type="number">
+            <input [(ngModel)]="character.totalHp" [ngClass]="getColorClass()"
+                   class="form-control form-control-sm text-center ease rounded-0 roundBottomRight px-1 fw-bolder"
+                   placeholder="MAX" style="width: 20%" title="Total HP" type="number">
           </div>
         </div>
 
         <!-- character sp input -->
         <div class="d-flex flex-column ms-1">
-        <span class="input-group-text fst-italic fw-bold py-0 rounded-0 roundTopLeft roundTopRight"
-              style="color: #d96dc0 !important; background-color: black !important;" [ngClass]="getColorClass()">SP</span>
+        <span [ngClass]="getColorClass()"
+              class="input-group-text fst-italic fw-bold py-0 rounded-0 roundTopLeft roundTopRight"
+              style="color: #d96dc0 !important; background-color: black !important;">SP</span>
           <div class="input-group">
-            <input [(ngModel)]="character.currSp" [ngClass]="getColorClass()" class="form-control form-control-sm text-center rounded-0 roundBottomLeft ease px-1"
-                   placeholder="SP" style="width: 20%" type="number" title="SP">
-            <input [(ngModel)]="character.totalSp" [ngClass]="getColorClass()" class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1 fw-bolder"
-                   placeholder="MAX" style="width: 20%" type="number" title="Total SP">
+            <input [(ngModel)]="character.currSp" [ngClass]="getColorClass()"
+                   class="form-control form-control-sm text-center rounded-0 roundBottomLeft ease px-1"
+                   placeholder="SP" style="width: 20%" title="SP" type="number">
+            <input [(ngModel)]="character.totalSp" [ngClass]="getColorClass()"
+                   class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1 fw-bolder"
+                   placeholder="MAX" style="width: 20%" title="Total SP" type="number">
           </div>
         </div>
 
@@ -63,16 +72,19 @@
       <div class="d-flex flex-row justify-content-between">
 
         <!-- willpower input field -->
-        <input [(ngModel)]="character.will" [ngClass]="getColorClass()" class="form-control form-control-sm px-1 text-center ease"
-               placeholder="VOL" style="width: 30%" type="text" title="Volonté">
+        <input [(ngModel)]="character.will" [ngClass]="getColorClass()"
+               class="form-control form-control-sm px-1 text-center ease"
+               placeholder="VOL" style="width: 30%" title="Volonté" type="text">
 
         <!-- wildcard input field -->
-        <input [(ngModel)]="character.wild" [ngClass]="getColorClass()" class="form-control form-control-sm px-1 text-center ease"
-               placeholder="JKR" style="width: 30%" type="text" title="Jokers">
+        <input [(ngModel)]="character.wild" [ngClass]="getColorClass()"
+               class="form-control form-control-sm px-1 text-center ease"
+               placeholder="JKR" style="width: 30%" title="Jokers" type="text">
 
         <!-- current luck input field -->
-        <input [(ngModel)]="character.currLuc" [ngClass]="getColorClass()" class="form-control form-control-sm px-1 text-center ease"
-               placeholder="LUC" style="width: 30%" type="text" title="Chance">
+        <input [(ngModel)]="character.currLuc" [ngClass]="getColorClass()"
+               class="form-control form-control-sm px-1 text-center ease"
+               placeholder="LUC" style="width: 30%" title="Chance" type="text">
       </div>
 
     </div>
@@ -83,7 +95,8 @@
            [class.border-secondary]="day.timeslot == 'day' && !day.mirror"
            [class.border-white]="day.timeslot == 'night' && !day.mirror"
            alt="Arcana Card"
-           class="ease border border-primary" style="border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; height: 150px">
+           class="ease border border-primary"
+           style="border: solid 2px; border-top-left-radius: 5px; border-top-right-radius: 5px; height: 125px">
         <canvas [data]="radarChartData"
                 [options]="radarChartOptions"
                 [type]="'radar'"
@@ -95,23 +108,23 @@
 
         <input [(ngModel)]="character.ath" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 fw-bolder rounded-0" placeholder="ATH"
-               type="number" title="Athlétisme">
+               title="Athlétisme" type="number">
 
         <input [(ngModel)]="character.pro" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 fw-bolder rounded-0" placeholder="MAI"
-               type="number" title="Maîtrise">
+               title="Maîtrise" type="number">
 
         <input [(ngModel)]="character.gut" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 fw-bolder rounded-0" placeholder="COU"
-               type="number" title="Courage">
+               title="Courage" type="number">
 
         <input [(ngModel)]="character.kno" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 fw-bolder rounded-0" placeholder="CON"
-               type="number" title="Connaissance">
+               title="Connaissance" type="number">
 
         <input [(ngModel)]="character.cha" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 fw-bolder rounded-0" placeholder="CHA"
-               type="number" title="Charme">
+               title="Charme" type="number">
 
       </div>
 
@@ -119,23 +132,23 @@
 
         <input [(ngModel)]="character.athExp" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 rounded-0 roundBottomLeft" placeholder="EXP"
-               type="number" title="EXP Athlétisme">
+               title="EXP Athlétisme" type="number">
 
         <input [(ngModel)]="character.proExp" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 rounded-0" placeholder="EXP"
-               type="number" title="EXP Maîtrise">
+               title="EXP Maîtrise" type="number">
 
         <input [(ngModel)]="character.gutExp" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 rounded-0" placeholder="EXP"
-               type="number" title="EXP Courage">
+               title="EXP Courage" type="number">
 
         <input [(ngModel)]="character.knoExp" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 rounded-0" placeholder="EXP"
-               type="number" title="EXP Connaissance">
+               title="EXP Connaissance" type="number">
 
         <input [(ngModel)]="character.chaExp" [ngClass]="getColorClass()"
                class="form-control form-control-sm text-center ease px-1 rounded-0 roundBottomRight" placeholder="EXP"
-               type="number" title="EXP Charme">
+               title="EXP Charme" type="number">
 
       </div>
     </div>
@@ -161,19 +174,20 @@
                class="form-control input-sm m p-0 text-center rounded-0 no-bottom-border ease"
                placeholder="Arme"
                style="width: 50%"
-               type="text"
-               title="Arme">
+               title="Arme"
+               type="text">
         <input [(ngModel)]="character.weaponStat" [ngClass]="getColorClass()"
                class="form-control input-sm p-0 text-center rounded-0 no-bottom-border roundTopRight ease"
                placeholder="Dégâts"
-               type="text"
-               title="Dégâts">
+               title="Dégâts"
+               type="text">
       </div>
 
       <!-- weapon effect -->
       <div class="input-group">
-        <input [(ngModel)]="character.weaponEffect" [ngClass]="getColorClass()" class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
-               placeholder="Effet" type="text" title="Effet d'arme">
+        <input [(ngModel)]="character.weaponEffect" [ngClass]="getColorClass()"
+               class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
+               placeholder="Effet" title="Effet d'arme" type="text">
       </div>
 
     </div>
@@ -199,19 +213,20 @@
                class="form-control input-sm m p-0 text-center rounded-0 no-bottom-border ease"
                placeholder="Arme"
                style="width: 50%"
-               type="text"
-               title="Armure">
+               title="Armure"
+               type="text">
         <input [(ngModel)]="character.armorStat" [ngClass]="getColorClass()"
                class="form-control input-sm p-0 text-center rounded-0 no-bottom-border roundTopRight ease"
                placeholder="Défense"
-               type="text"
-               title="Défense">
+               title="Défense"
+               type="text">
       </div>
 
       <!-- armor effect -->
       <div class="input-group">
-        <input [(ngModel)]="character.armorEffect" [ngClass]="getColorClass()" class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
-               placeholder="Effet" type="text" title="Effet d'armure">
+        <input [(ngModel)]="character.armorEffect" [ngClass]="getColorClass()"
+               class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
+               placeholder="Effet" title="Effet d'armure" type="text">
       </div>
 
     </div>
@@ -236,15 +251,47 @@
         <input [(ngModel)]="character.accessory" [ngClass]="getColorClass()"
                class="form-control input-sm m p-0 text-center rounded-0 no-bottom-border roundTopRight ease"
                placeholder="Accessoire"
-               type="text" title="Accessoire">
+               title="Accessoire" type="text">
       </div>
 
       <!-- accessory effect -->
       <div class="input-group">
-        <input [(ngModel)]="character.accessoryEffect" [ngClass]="getColorClass()" class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
-               placeholder="Effet" type="text" title="Effet d'accessoire">
+        <input [(ngModel)]="character.accessoryEffect" [ngClass]="getColorClass()"
+               class="form-control form-control-sm text-center rounded-0 roundBottomRight ease px-1"
+               placeholder="Effet" title="Effet d'accessoire" type="text">
       </div>
 
+    </div>
+
+  </div>
+
+  <!-- xp triggers & money row -->
+  <div class="d-flex flex-row justify-content-between mt-2">
+
+    <!-- xp triggers col -->
+    <div class="d-flex flex-column w-75">
+      <input [(ngModel)]="character.expTrigger1" [ngClass]="getColorClass()"
+             class="form-control input-xs p-0 text-center ease rounded-0 roundTopLeft roundTopRight no-bottom-border"
+             type="text" placeholder="Critère d'expérience 1">
+
+      <input [(ngModel)]="character.expTrigger2" [ngClass]="getColorClass()" class="form-control input-xs p-0 text-center ease rounded-0 no-bottom-border"
+             type="text" placeholder="Critère d'expérience 2">
+
+      <input [(ngModel)]="character.expTrigger3" [ngClass]="getColorClass()"
+             class="form-control input-xs p-0 text-center ease rounded-0 roundBottomLeft roundBottomRight"
+             type="text" placeholder="Critère d'expérience 3">
+    </div>
+
+    <!-- money col -->
+    <div class="d-flex flex-column w-25 ms-1">
+          <span [ngClass]="getColorClass()"
+                class="input-group-text fst-italic fw-bold py-0 rounded-0 roundTopLeft roundTopRight"
+                style="color: #f1f1f1 !important; background-color: black !important;">¥</span>
+      <div class="input-group">
+        <input [(ngModel)]="character.money" [ngClass]="getColorClass()"
+               class="form-control form-control-sm text-center ease rounded-0 roundBottomLeft roundBottomRight px-1"
+               placeholder="Yen" title="Yen" type="number">
+      </div>
     </div>
 
   </div>
@@ -253,24 +300,29 @@
   <div class="d-flex flex-row justify-content-between mt-2">
 
     <!-- tracker 1 input -->
-    <input [(ngModel)]="character.track1" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1"
-           placeholder="Tracker 1" style="width: 20%" type="number" title="Tracker 1">
+    <input [(ngModel)]="character.track1" [ngClass]="getColorClass()"
+           class="form-control form-control-sm text-center ease px-1"
+           placeholder="Tracker 1" style="width: 20%" title="Tracker 1" type="number">
 
     <!-- tracker 2 input -->
-    <input [(ngModel)]="character.track2" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 ms-2"
-           placeholder="Tracker 2" style="width: 20%" type="number" title="Tracker 2">
+    <input [(ngModel)]="character.track2" [ngClass]="getColorClass()"
+           class="form-control form-control-sm text-center ease px-1 ms-2"
+           placeholder="Tracker 2" style="width: 20%" title="Tracker 2" type="number">
 
     <!-- tracker 3 input -->
-    <input [(ngModel)]="character.track3" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 ms-2"
-           placeholder="Tracker 3" style="width: 20%" type="number" title="Tracker 3">
+    <input [(ngModel)]="character.track3" [ngClass]="getColorClass()"
+           class="form-control form-control-sm text-center ease px-1 ms-2"
+           placeholder="Tracker 3" style="width: 20%" title="Tracker 3" type="number">
 
     <!-- tracker 4 input -->
-    <input [(ngModel)]="character.track4" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 ms-2"
-           placeholder="Tracker 4" style="width: 20%" type="number" title="Tracker 4">
+    <input [(ngModel)]="character.track4" [ngClass]="getColorClass()"
+           class="form-control form-control-sm text-center ease px-1 ms-2"
+           placeholder="Tracker 4" style="width: 20%" title="Tracker 4" type="number">
 
     <!-- tracker 5 input -->
-    <input [(ngModel)]="character.track5" [ngClass]="getColorClass()" class="form-control form-control-sm text-center ease px-1 ms-2"
-           placeholder="Tracker 5" style="width: 20%" type="number" title="Tracker 5">
+    <input [(ngModel)]="character.track5" [ngClass]="getColorClass()"
+           class="form-control form-control-sm text-center ease px-1 ms-2"
+           placeholder="Tracker 5" style="width: 20%" title="Tracker 5" type="number">
 
   </div>
 
@@ -289,8 +341,8 @@
        [popoverClass]="getPopoverColorClass()"
        [positionTarget]="helpTarget"
        class="fas fa-lg fa-question-circle"
-       triggers="mouseenter:mouseleave"
-       placement="top">
+       placement="top"
+       triggers="mouseenter:mouseleave">
     </i>
 
   </div>
@@ -300,33 +352,33 @@
 <!-- character help popup -->
 <ng-template #characterHelp>
   <div [ngClass]="getTextColorClass()" style="font-size: 10px;">
-<!--     <div class="my-1 text-center fw-bold" style="font-size: 13px;">MONTER DE NIVEAU</div>
-    <div><u>Niveau 2</u> : <span class="fw-bold">5 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 3</u> : <span class="fw-bold">6 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 4</u> : <span class="fw-bold">7 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 5</u> : <span class="fw-bold">8 XP</span> - (Capacité d'arcane / Stats Bonus / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 6</u> : <span class="fw-bold">9 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus / SP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 7</u> : <span class="fw-bold">10 XP</span> - (Capacité d'enseigne / 2 Compétences / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 8</u> : <span class="fw-bold">11 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 9</u> : <span class="fw-bold">12 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 10</u> : <span class="fw-bold">13 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 11</u> : <span class="fw-bold">14 XP</span> - (Capacité d'arcane / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 12</u> : <span class="fw-bold">15 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus / SP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 13</u> : <span class="fw-bold">16 XP</span> - (Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 14</u> : <span class="fw-bold">17 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
-    <hr class="my-1">
-    <div><u>Niveau 15</u> : <span class="fw-bold">18 XP</span> - (Stats Bonus / Compétence / HP Bonus / SP Bonus)</div> -->
+    <!--     <div class="my-1 text-center fw-bold" style="font-size: 13px;">MONTER DE NIVEAU</div>
+        <div><u>Niveau 2</u> : <span class="fw-bold">5 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 3</u> : <span class="fw-bold">6 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 4</u> : <span class="fw-bold">7 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 5</u> : <span class="fw-bold">8 XP</span> - (Capacité d'arcane / Stats Bonus / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 6</u> : <span class="fw-bold">9 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus / SP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 7</u> : <span class="fw-bold">10 XP</span> - (Capacité d'enseigne / 2 Compétences / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 8</u> : <span class="fw-bold">11 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 9</u> : <span class="fw-bold">12 XP</span> - (Capacité d'arcane / Compétence / HP Bonus / SP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 10</u> : <span class="fw-bold">13 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 11</u> : <span class="fw-bold">14 XP</span> - (Capacité d'arcane / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 12</u> : <span class="fw-bold">15 XP</span> - (Capacité d'enseigne / Stats Bonus / Compétence / HP Bonus / SP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 13</u> : <span class="fw-bold">16 XP</span> - (Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 14</u> : <span class="fw-bold">17 XP</span> - (Capacité d'enseigne / Compétence / HP Bonus)</div>
+        <hr class="my-1">
+        <div><u>Niveau 15</u> : <span class="fw-bold">18 XP</span> - (Stats Bonus / Compétence / HP Bonus / SP Bonus)</div> -->
   </div>
 </ng-template>

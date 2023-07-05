@@ -1,6 +1,6 @@
 export class Character {
 
-    constructor(_id, _name, _ath, _pro, _gut, _kno, _cha, _athExp, _proExp, _gutExp, _knoExp, _chaExp, _currHp, _totalHp, _currSp, _totalSp, _currLuc, _will, _wild, _weapon, _weaponStat, _weaponEffect, _armor, _armorStat, _armorEffect, _accessory, _accessoryEffect, _track1, _track2, _track3, _track4, _track5, _user) {
+    constructor(_id, _name, _ath, _pro, _gut, _kno, _cha, _athExp, _proExp, _gutExp, _knoExp, _chaExp, _currHp, _totalHp, _currSp, _totalSp, _currLuc, _will, _wild, _weapon, _weaponStat, _weaponEffect, _armor, _armorStat, _armorEffect, _accessory, _accessoryEffect, _track1, _track2, _track3, _track4, _track5, _expTrigger1, _expTrigger2, _expTrigger3, _money, _user) {
         this.id = _id;
         this.name = _name;
         this.ath = _ath;
@@ -33,6 +33,10 @@ export class Character {
         this.track3 = _track3;
         this.track4 = _track4;
         this.track5 = _track5;
+        this.expTrigger1 = _expTrigger1;
+        this.expTrigger2 = _expTrigger2;
+        this.expTrigger3 = _expTrigger3;
+        this.money = _money;
         this.user = _user;
     }
 
@@ -69,6 +73,10 @@ export class Character {
     getTrack3() { return this.track3; }
     getTrack4() { return this.track4; }
     getTrack5() { return this.track5; }
+    getExpTrigger1() { return this.expTrigger1; }
+    getExpTrigger2() { return this.expTrigger2; }
+    getExpTrigger3() { return this.expTrigger3; }
+    getMoney() { return this.money; }
     getUser() { return this.user; }
 
     // setters
@@ -104,6 +112,10 @@ export class Character {
     setTrack3(_track3) { this.track3 = _track3; }
     setTrack4(_track4) { this.track4 = _track4; }
     setTrack5(_track5) { this.track5 = _track5; }
+    setExpTrigger1(_expTrigger1) { this.expTrigger1 = _expTrigger1; }
+    setExpTrigger2(_expTrigger2) { this.expTrigger2 = _expTrigger2; }
+    setExpTrigger3(_expTrigger3) { this.expTrigger3 = _expTrigger3; }
+    setMoney(_money) { this.money = _money; }
     setUser(_user) { this.user = _user; }
 
 }

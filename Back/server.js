@@ -581,6 +581,10 @@ app.put('/character/:id', async (req, res) => {
                 body.track3,
                 body.track4, 
                 body.track5,
+                body.expTrigger1,
+                body.expTrigger2,
+                body.expTrigger3,
+                body.money,
                 new User(body.user.id, null, null, null)
             ));
         data ? res.send(data) : res.status(404).send(RESSOURCE_NOT_FOUND);

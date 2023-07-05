@@ -128,7 +128,7 @@ export class UserDAO {
             await inventoryDAO.add(itemsArr, '', data);
 
             const characterDAO = new CharacterDAO();
-            await characterDAO.add('', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, data);
+            await characterDAO.add('', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', '', '', '', '', '', '', '', 0, 0, 0, 0, 0, '', '', '', 0, data);
         } else {
             data = null;
         }
