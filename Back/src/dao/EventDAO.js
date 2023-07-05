@@ -15,7 +15,6 @@ export class EventDAO {
                 (showAll ? `` : ` AND hidden=FALSE`) + 
                 ` ORDER BY start_date, end_date, title ASC`,
         };
-        console.log(query.text);
         const result = await client.query(query);
         let data;
         if(result && result.rows) {
