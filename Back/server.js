@@ -108,7 +108,7 @@ app.put('/users/:id', async (req, res) => {
         const body = req.body;
         const data = await userDAO.update(
             new User(
-                body.id,
+                req.params.id,
                 body.username,
                 crypto.createHash('sha1').update(req.body.key).digest('hex'),
                 false

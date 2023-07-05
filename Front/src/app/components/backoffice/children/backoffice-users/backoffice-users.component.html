@@ -42,7 +42,7 @@
     <th scope="row">{{ user.id }}</th>
     <td>{{ user.username }}</td>
     <td>
-      <button class="btn btn-outline-warning px-2 py-1" (click)="setCurrentUser(user); openModal(userModal)">
+      <button class="btn btn-outline-warning px-2 py-1" (click)="setCurrentUser(user); currentKey = ''; openModal(userModal)">
         <i class="fas fa-pen"></i>
       </button>
     </td>
