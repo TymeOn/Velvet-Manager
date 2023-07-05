@@ -4,7 +4,7 @@
   <div class="d-flex flex-row justify-content-between">
 
     <!-- first items col -->
-    <div class="d-flex flex-column align me-1">
+    <div class="d-flex flex-column align me-1 w-100">
       <input *ngFor="let data of [].constructor(7); let i = index" [(ngModel)]="inventory.items[i]"
              [class.no-bottom-border]="i != 6" [class.roundTop]="i == 0" [class.roundBottom]="i == 6"
              class="form-control form-control-sm px-1 text-center rounded-0 ease" placeholder="Item" type="text"
@@ -12,7 +12,7 @@
     </div>
 
     <!-- second items col -->
-    <div class="d-flex flex-column align ms-1">
+    <div class="d-flex flex-column align ms-1 w-100">
       <input *ngFor="let data of [].constructor(7); let i = index" [(ngModel)]="inventory.items[i+7]"
              [class.no-bottom-border]="i != 6" [class.roundTop]="i == 0" [class.roundBottom]="i == 6"
              class="form-control form-control-sm px-1 text-center rounded-0 ease" placeholder="Item" type="text"
