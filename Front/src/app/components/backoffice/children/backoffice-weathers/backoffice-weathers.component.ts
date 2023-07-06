@@ -23,6 +23,8 @@ export class BackofficeWeathersComponent implements OnInit {
   }
   currentWeather = JSON.parse(JSON.stringify(this.weatherTemplate));
 
+  // search values
+  searchValue = '';
   ongoingSelector = true;
 
   constructor(private http: HttpClient, private modalService: NgbModal) {
@@ -43,6 +45,7 @@ export class BackofficeWeathersComponent implements OnInit {
     this.http.get(environment.url + url).subscribe(data => {
       this.weatherList = data;
       this.fullWeatherList = data;
+      this.search();
     });
   }
 
@@ -63,8 +66,8 @@ export class BackofficeWeathersComponent implements OnInit {
   }
 
   // search and filter the marker list
-  search(text: string) {
-    const term = text.toLowerCase();
+  search() {
+    const term = this.searchValue.toLowerCase();
 
     if (term == '') {
       this.resetSearch();

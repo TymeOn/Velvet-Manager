@@ -26,6 +26,8 @@ export class BackofficeEventsComponent implements OnInit {
   }
   currentEvent = JSON.parse(JSON.stringify(this.eventTemplate));
 
+  // search values
+  searchValue = '';
   ongoingSelector = true;
 
   constructor(private http: HttpClient, private modalService: NgbModal) {
@@ -46,6 +48,7 @@ export class BackofficeEventsComponent implements OnInit {
     this.http.get(environment.url + url).subscribe(data => {
       this.eventList = data;
       this.fullEventList = data;
+      this.search();
     });
   }
 
@@ -91,8 +94,8 @@ export class BackofficeEventsComponent implements OnInit {
   }
 
   // search and filter the weather list
-  search(text: string) {
-    const term = text.toLowerCase();
+  search() {
+    const term = this.searchValue.toLowerCase();
 
     if (term == '') {
       this.resetSearch();

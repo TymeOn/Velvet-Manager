@@ -26,6 +26,9 @@ export class BackofficeMarkersComponent implements OnInit {
   }
   currentMarker = JSON.parse(JSON.stringify(this.markerTemplate));
 
+  // search value
+  searchValue = '';
+
   constructor(private http: HttpClient, private modalService: NgbModal) {
   }
 
@@ -43,6 +46,7 @@ export class BackofficeMarkersComponent implements OnInit {
     this.http.get(environment.url + 'markers?showAll=true').subscribe(data => {
       this.markerList = data;
       this.fullMarkerList = data;
+      this.search();
     });
   }
 
@@ -90,8 +94,8 @@ export class BackofficeMarkersComponent implements OnInit {
   }
 
   // search and filter the marker list
-  search(text: string) {
-    const term = text.toLowerCase();
+  search() {
+    const term = this.searchValue.toLowerCase();
 
     if (term == '') {
       this.resetSearch();

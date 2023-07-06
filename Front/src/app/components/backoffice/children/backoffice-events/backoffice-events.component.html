@@ -13,8 +13,8 @@
 
   <!-- search bar -->
   <div class="input-group w-25 me-4">
-    <input #searchInput type="text" class="form-control bg-dark text-white" placeholder="Recherche" (input)="search(searchInput.value)">
-    <button class="btn btn-outline-secondary" type="button" (click)="searchInput.value = ''; resetSearch()">
+    <input #searchInput type="text" class="form-control bg-dark text-white" placeholder="Recherche" (input)="searchValue = searchInput.value; search()">
+    <button class="btn btn-outline-secondary" type="button" (click)="searchValue = ''; searchInput.value = ''; resetSearch()">
       <i class="fas fa-times"></i>
     </button>
   </div>

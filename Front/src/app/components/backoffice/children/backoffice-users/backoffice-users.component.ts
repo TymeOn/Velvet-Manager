@@ -23,6 +23,9 @@ export class BackofficeUsersComponent implements OnInit {
   currentUser = JSON.parse(JSON.stringify(this.userTemplate));
   currentKey = '';
 
+  // search value
+  searchValue = '';
+
   constructor(private http: HttpClient, private modalService: NgbModal) {
   }
 
@@ -40,6 +43,7 @@ export class BackofficeUsersComponent implements OnInit {
     this.http.get(environment.url + 'users').subscribe(data => {
       this.userList = data;
       this.fullUserList = data;
+      this.search();
     });
   }
 
@@ -83,8 +87,8 @@ export class BackofficeUsersComponent implements OnInit {
   }
 
   // search and filter the user list
-  search(text: string) {
-    const term = text.toLowerCase();
+  search() {
+    const term = this.searchValue.toLowerCase();
 
     if (term == '') {
       this.resetSearch();
