@@ -31,18 +31,19 @@ export class DashboardComponent implements OnInit{
 
     if (!loggedIn) {
       this.router.navigate(['/login']);
+    } else {
+
+      this.username = loggedIn.username;
+      this.userId = loggedIn.userId;
+
+      // on startup, fetch everything
+      this.dataService.setUserId(loggedIn.userId);
+      this.dataService.setOriginalUserId(loggedIn.userId);
+      this.dataService.setAdmin(loggedIn.admin);
+      this.dataService.fetchAll();
+
+      this.http.get(environment.url + 'users').subscribe(data => this.users = data);
     }
-
-    this.username = loggedIn.username;
-    this.userId = loggedIn.userId;
-
-    // on startup, fetch everything
-    this.dataService.setUserId(loggedIn.userId);
-    this.dataService.setOriginalUserId(loggedIn.userId);
-    this.dataService.setAdmin(loggedIn.admin);
-    this.dataService.fetchAll();
-
-    this.http.get(environment.url + 'users').subscribe(data => this.users = data);
   }
 
   // open a large modal
