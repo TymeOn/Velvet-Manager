@@ -72,6 +72,7 @@
   <ng-template #rollHistory>
     <div class="mb-1 text-center fst-italic" [ngClass]="getTextColorClass()">...</div>
     <div *ngFor="let roll of rolls" class="mb-1" [ngClass]="getTextColorClass()">
+      <span class="fst-italic text-muted">{{ roll.timestamp | date:'HH:mm' }}: </span>
       <span class="text-decoration-underline">{{ roll.user.username }}</span>
       <span> a fait un</span>
       <span class="fw-bold"> {{ roll.type == '■' ? '■' : roll.value }}</span>
