@@ -57,7 +57,7 @@ export class DB {
                 await DB.client.query(query1);
                 const query2 = `
                     CREATE TABLE IF NOT EXISTS ${process.env.PG_SCHEMA}.rolls (
-                        id SERIAL, type VARCHAR(128), value INTEGER, detail VARCHAR(256), timestamp TIMESTAMP, user_id INTEGER,
+                        id SERIAL, type VARCHAR(128), value INTEGER, detail VARCHAR(256), timestamp TIMESTAMP WITH TIME ZONE, user_id INTEGER,
                         PRIMARY KEY(id),
                         FOREIGN KEY(user_id) REFERENCES ${process.env.PG_SCHEMA}.users(id) ON DELETE CASCADE
                     );
