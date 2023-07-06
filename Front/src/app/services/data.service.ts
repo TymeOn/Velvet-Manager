@@ -42,6 +42,10 @@ export class DataService {
       this.fetchCurrentEvents();
     });
 
+    this.socket.fromEvent('weather-updated').subscribe(() => {
+      this.fetchWeather();
+    });
+
     this.socket.fromEvent('events-updated').subscribe(() => {
       this.fetchCurrentEvents();
       this.fetchEvents();

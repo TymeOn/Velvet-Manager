@@ -383,6 +383,7 @@ app.put('/weathers/:date', async (req, res) => {
                 body.temperature
             ));
         data ? res.send(data) : res.status(404).send(RESSOURCE_NOT_FOUND);
+        io.emit('weather-updated');
     } catch (err) {
         res.status(500).send({errName: err.name, errMessage: err.message});
     }
