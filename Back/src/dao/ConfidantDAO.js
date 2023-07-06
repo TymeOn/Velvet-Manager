@@ -66,7 +66,7 @@ export class ConfidantDAO {
             const client = await DB.open();
             const query = {
                 text: `UPDATE ${process.env.PG_SCHEMA}.confidants 
-                        SET arcana=$2, name=$3, exp=$4, lvl=$5
+                        SET arcana=$2, name=$3, lvl=$4, exp=$5
                         WHERE id=$1
                         RETURNING *`,
                 values: [
