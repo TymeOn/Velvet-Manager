@@ -94,8 +94,8 @@ export class UserDAO {
                 result.rows[0].admin
             );
             const confidantDAO = new ConfidantDAO();
-            const emptyArr = Array(12).fill('');
-            const nullArr = Array(12).fill(null)
+            const emptyArr = Array(16).fill('');
+            const nullArr = Array(16).fill(null)
             await confidantDAO.add(emptyArr, emptyArr, nullArr, nullArr, data);
 
             const personaDAO = new PersonaDAO();

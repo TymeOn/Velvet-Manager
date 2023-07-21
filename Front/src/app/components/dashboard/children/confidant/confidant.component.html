@@ -1,11 +1,11 @@
 <div *ngIf="confidants" class="d-flex flex-column justify-content-around h-100 px-3 pt-3 pb-2">
 
   <!-- confidant lines -->
-  <div *ngFor="let data of [].constructor(12); let i = index" class="d-flex flex-row align-items-center">
+  <div *ngFor="let data of [].constructor(16); let i = index" class="d-flex flex-row align-items-center">
 
     <!-- arcana card image -->
     <img [src]="'/assets/tarot-cards/' + (confidants.arcana[i] != '' ? confidants.arcana[i] : 'none') + '.png'"
-         style="height: 40px; border: solid 2px; border-radius: 5px" class="ease"
+         style="height: 30px; border: solid 2px; border-radius: 5px" class="ease"
          [class.border-dark]="day.timeslot == 'day' && !day.mirror"
          [class.border-white]="day.timeslot == 'night' && !day.mirror"
          [class.border-mirror]="day.mirror" alt="Arcana Card">
@@ -41,18 +41,18 @@
     </select>
 
     <!-- name input field -->
-    <input [(ngModel)]="confidants.name[i]" class="form-control form-control-sm ms-2 p-0 text-center ease" placeholder="Nom"
+    <input [(ngModel)]="confidants.name[i]" class="form-control form-control-sm ms-2 p-0 text-center ease input-xs" placeholder="Nom"
            style="width: 35%" type="text"
            [ngClass]="getColorClass()">
 
     <div class="vr mx-3"></div>
 
     <!-- confidant level input -->
-    <input [(ngModel)]="confidants.lvl[i]" class="form-control form-control-sm text-center ease px-1 fw-bolder" placeholder="LV"
+    <input [(ngModel)]="confidants.lvl[i]" class="form-control form-control-sm text-center ease px-1 fw-bolder input-xs" placeholder="LV"
            style="width: 8%" type="number" [ngClass]="getColorClass()" title="Niveau">
 
     <!-- confidant experience input -->
-    <input [(ngModel)]="confidants.exp[i]" class="form-control form-control-sm text-center ease px-1 ms-2" placeholder="XP"
+    <input [(ngModel)]="confidants.exp[i]" class="form-control form-control-sm text-center ease px-1 ms-2 input-xs" placeholder="XP"
            style="width: 8%" type="number" [ngClass]="getColorClass()" title="XP">
 
   </div>
